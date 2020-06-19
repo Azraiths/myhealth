@@ -18,6 +18,10 @@ class RecipePanel extends Component {
             </Group>
         )
     }
+
+    async componentDidMount() {
+
+    }
 }
 
 
