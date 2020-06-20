@@ -3,6 +3,7 @@ export default {
   icon: {
     color: accent,
   },
+
   button: {
     backgroundColor: accent,
   },
