@@ -3,7 +3,6 @@ import {
   Button, Cell, Div,
   FormLayout, FormLayoutGroup, Input, Select,
 } from '@vkontakte/vkui';
-import Icon28MoneyCircleOutline from '@vkontakte/icons/dist/28/money_circle_outline';
 import styles from './styles';
 
 class TimeAndDoseList extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import {
-  Group, Card, CardGrid, Cell, Placeholder, Avatar,
+  Group, Card, CardGrid, Cell, Placeholder,
 } from '@vkontakte/vkui';
 
 import PropTypes from 'prop-types';
