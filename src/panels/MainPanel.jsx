@@ -64,7 +64,7 @@ class MainPanel extends React.Component {
               data-story="recipe"
               text="Рецепты"
             >
-              <Recipe />
+              <Recipe style={{ fill: activeStory === 'recipe' ? styles.icon.color : '#99a2ad' }} />
             </TabbarItem>
             <TabbarItem
               onClick={this.onStoryChange}
