@@ -73,7 +73,7 @@ const AidInfo = (props) => {
 AidInfo.propTypes = {
   user_id: PropTypes.string.isRequired,
   medical: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  medtype: PropTypes.string.isRequired,
   doctor: PropTypes.string.isRequired,
   dstart: PropTypes.instanceOf(Date).isRequired,
   dfinish: PropTypes.instanceOf(Date).isRequired,
