@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
 import {
-  Group, Card, CardGrid, Cell, Footer, Placeholder,
+  Group, Card, CardGrid, Cell, Placeholder,
 } from '@vkontakte/vkui';
 import Icon28MoneyCircleOutline from '@vkontakte/icons/dist/28/money_circle_outline';
-import Div from '@vkontakte/vkui/dist/components/Div/Div';
+
+import { ReactComponent as Pill } from '../img/aptechka_28.svg';
 
 Array.prototype.isEmpty = function () {
   return this.length == 0;
@@ -38,6 +39,8 @@ class AidKitPanel extends Component {
 
           && (
           <Placeholder
+            stretched
+            icon={<Pill style={{ height: '48px', width: '48px' }} />}
             header="В вашей аптечке пусто."
           >
             Лекарства можно добавить кнопкой
