@@ -43,8 +43,8 @@ class AidKitPanel extends Component {
         <CardGrid>
           {
             medicines.map((v) => (
-              <Card key={v.name} onClick={() => goToInfo(v)} size="l" mode="shadow">
-                <Cell before={<Avatar src={pill} />} description={v.description}>{v.name}</Cell>
+              <Card key={v.medical} onClick={() => goToInfo(v)} size="l" mode="shadow">
+                <Cell before={<Pill />} description={`Назначение сделал: ${v.doctor}`}>{v.medical}</Cell>
               </Card>
             ))
           }
