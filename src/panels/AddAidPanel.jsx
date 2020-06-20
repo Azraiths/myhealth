@@ -80,9 +80,8 @@ class AddAidPanel extends Component {
       user_id: user,
       times,
     };
-    console.log(props);
     const res = await addTracking(props);
-    console.log(res);
+    this.props.onModalClose();
   }
 
   addTimes() {

@@ -149,7 +149,7 @@ class MainPanel extends React.Component {
             >
               Добавить лекарство
             </PanelHeader>
-            <AddAidPanel user={user} />
+            <AddAidPanel onModalClose={() => this.setState({ aidKitActivePanel: 'aidKit' })} user={user} />
           </Panel>
 
           <Panel id="aidInfo">
