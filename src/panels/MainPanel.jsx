@@ -14,11 +14,13 @@ import AddAidPanel from './AddAidPanel';
 import AidInfo from './AidInfo';
 import styles from './styles';
 import { ReactComponent as Recipe } from '../img/raspisanie_28.svg';
+import AddExpensesModal from '../components/AddExpensesModal';
 
 class MainPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      modal: null,
       activeStory: 'aidKit',
       /**
        * Внутри главной панели Epic есть подразделы, как фрагмент в андроиде.
@@ -39,6 +41,14 @@ class MainPanel extends React.Component {
 
   goToInfo(medicine) {
     this.setState({ aidKitActivePanel: 'aidInfo', chosenMedicine: medicine });
+  }
+
+  openExpensesModal(e) {
+    this.setState({ modal: 'addBoughtMedicine' });
+  }
+
+  onModalClose() {
+    this.setState({ modal: null });
   }
 
   render() {
@@ -141,10 +151,10 @@ class MainPanel extends React.Component {
 
           </Panel>
         </View>
-        <View id="expenses" activePanel="expenses">
+        <View id="expenses" activePanel="expenses" modal={<AddExpensesModal onModalClose={(e) => this.onModalClose(e)} activeModal={this.state.modal} />}>
           <Panel id="expenses">
             <PanelHeader>Расходы</PanelHeader>
-            <ExpensesPanel />
+            <ExpensesPanel openExpensesModal={(e) => this.openExpensesModal(e)} />
           </Panel>
         </View>
       </Epic>

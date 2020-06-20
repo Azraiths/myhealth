@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import {
-  Group, List, Cell, RichCell,
+  Group,
+  List,
+  Cell,
+  RichCell,
+  Text,
+  Button,
 } from '@vkontakte/vkui';
-import Icon28MoneyCircleOutline from '@vkontakte/icons/dist/28/money_circle_outline';
 import { ReactComponent as Pill } from '../img/aptechka_28.svg';
+import styles from './styles';
+import EmptyStateAidKit from '../components/EmptyStateAidKit';
 
 class ExpensesPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      activeModal: null,
       expenses: [
         {
           user_id: 404,
@@ -30,24 +37,44 @@ class ExpensesPanel extends Component {
     };
   }
 
+  onClose(e) {
+    this.setState({ activeModal: null });
+  }
+
   render() {
     const { expenses } = this.state;
     return (
       <Group>
-        <List>
-          {
-            expenses.map((v) => (
-              <RichCell
-                after={`-${v.cost}₽`}
-                text={v.amount}
-                caption={v.dpurch}
-                before={<Pill />}
-              >
-                {v.medical}
-              </RichCell>
-            ))
-          }
-        </List>
+        {
+          expenses.length === 0 ? (
+            <EmptyStateAidKit />
+          )
+            : (
+              <List>
+                {
+                      expenses.map((v) => (
+                        <RichCell
+                          key={v.dpurch}
+                          after={<Text style={{ fontWeight: 'bold' }}>{`-${v.cost}₽`}</Text>}
+                          text={v.amount}
+                          caption={v.dpurch}
+                          before={<Pill width="48px" height="48px" style={{ paddingRight: '10px' }} />}
+                        >
+                          {v.medical}
+                        </RichCell>
+                      ))
+                    }
+              </List>
+            )
+        }
+        <Cell style={styles.cell}>
+          <Button
+            onClick={() => this.props.openExpensesModal()}
+            style={styles.button}
+          >
+            Добавить купленное лекарство
+          </Button>
+        </Cell>
       </Group>
     );
   }

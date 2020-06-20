@@ -61,7 +61,7 @@ class RecipePanel extends Component {
         <CardGrid>
           {
               medicines.map((v) => (
-                <Card key={v.medical} onClick={() => goToInfo(v)} size="l" mode="shadow">
+                <Card key={v.medical} size="l" mode="shadow">
                   <Cell before={<Text style={styles.font}>{v.time}</Text>} description={`${v.medtype} - ${v.dose}`}>{v.medical}</Cell>
                 </Card>
               ))
