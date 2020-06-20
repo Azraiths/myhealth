@@ -39,10 +39,18 @@ class MainPanel extends React.Component {
     this.setState({ activeStory: e.currentTarget.dataset.story });
   }
 
+  /**
+     * Переходим в панель информации о медикаменте и перекидываем нужные пропсы
+     * @param medicine
+     */
   goToInfo(medicine) {
     this.setState({ aidKitActivePanel: 'aidInfo', chosenMedicine: medicine });
   }
 
+  /**
+     * При открытии панели ловим ивент из AddExpensesModal, ставим активную панель в ModalRoot
+     * @param e String название панели
+     */
   openExpensesModal(e) {
     this.setState({ modal: 'addBoughtMedicine' });
   }
@@ -151,7 +159,17 @@ class MainPanel extends React.Component {
 
           </Panel>
         </View>
-        <View id="expenses" activePanel="expenses" modal={<AddExpensesModal onModalClose={(e) => this.onModalClose(e)} activeModal={this.state.modal} />}>
+        <View
+          id="expenses"
+          activePanel="expenses"
+          modal={(
+            <AddExpensesModal
+              user={user}
+              onModalClose={(e) => this.onModalClose(e)}
+              activeModal={this.state.modal}
+            />
+            )}
+        >
           <Panel id="expenses">
             <PanelHeader>Расходы</PanelHeader>
             <ExpensesPanel openExpensesModal={(e) => this.openExpensesModal(e)} />

@@ -10,6 +10,7 @@ import {
 } from '@vkontakte/vkui';
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import Icon24Done from '@vkontakte/icons/dist/24/done';
+import addExpenses from '../models/addExpenses';
 
 class AddExpensesModal extends Component {
   constructor(props) {
@@ -19,14 +20,26 @@ class AddExpensesModal extends Component {
       cost: null,
       amount: null,
       pharmacyName: null,
+      dpurch: null,
     };
   }
 
-  onClose(e) {
+  async onClose(e) {
+    const { user } = this.props;
     const {
-      name, cost, amount, pharmacyName,
+      name, cost, amount, pharmacyName, dpurch,
     } = this.state;
-    console.log(this.state);
+    const data = {
+      user_id: user,
+      medical: name,
+      cost,
+      dpurch,
+      amount,
+      pharm: pharmacyName,
+    };
+    console.log(data);
+    const res = await addExpenses(data);
+    console.log(res);
     this.props.onModalClose(e);
   }
 
@@ -78,6 +91,12 @@ class AddExpensesModal extends Component {
                 type="text"
                 placeholder="Введите название аптеки"
                 onChange={(e) => this.onTextChange(e, 'pharmacyName')}
+              />
+            </FormLayoutGroup>
+            <FormLayoutGroup top="Время покупки">
+              <Input
+                type="date"
+                onChange={(e) => this.onTextChange(e, 'dpurch')}
               />
             </FormLayoutGroup>
           </FormLayout>
