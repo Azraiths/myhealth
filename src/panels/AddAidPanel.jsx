@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import {
+  Button,
   Footer,
   FormLayout, FormLayoutGroup, Input, Select,
 } from '@vkontakte/vkui';
+import Icon28MoneyCircleOutline from '@vkontakte/icons/dist/28/money_circle_outline';
+import styles from './styles';
 
 // TODO: Добавить время приёма.
 //  В идеале давать пользователю выбирать частоту и расширить количество вариантов
@@ -12,6 +15,9 @@ class AddAidPanel extends Component {
     this.state = {
       name: 'Лекарство',
       type: 'pills',
+      doctor: '',
+      dateStart: '',
+      dateEnd: '',
     };
   }
 
@@ -23,8 +29,22 @@ class AddAidPanel extends Component {
     this.setState({ type: e.target.value });
   }
 
+  changeDoctor(e) {
+    this.setState({ doctor: e.target.value });
+  }
+
+  changeStartDate(e) {
+    this.setState({ dateStart: e.target.value });
+  }
+
+  changeEndDate(e) {
+    this.setState({ dateEnd: e.target.value });
+  }
+
   render() {
-    const { name } = this.state;
+    const {
+      name, doctor, dateStart, dateEnd,
+    } = this.state;
     return (
       <FormLayout>
         <FormLayoutGroup top="Название">
@@ -32,6 +52,14 @@ class AddAidPanel extends Component {
             type="text"
             onChange={(e) => this.changeName(e)}
             value={name}
+            label="Введите название лекарства"
+          />
+        </FormLayoutGroup>
+        <FormLayoutGroup top="Доктор">
+          <Input
+            type="text"
+            onChange={(e) => this.changeDoctor(e)}
+            value={doctor}
             label="Введите название лекарства"
           />
         </FormLayoutGroup>
@@ -46,12 +74,22 @@ class AddAidPanel extends Component {
             <option value="lenses">Линзы</option>
           </Select>
         </FormLayoutGroup>
-        <FormLayoutGroup top="Продолжительность приёма">
-          <Select defaultValue="endless">
-            <option value="endless">Без даты окончания</option>
-            <option value="week">1 неделя</option>
-            <option value="month">1 месяц</option>
-          </Select>
+        <FormLayoutGroup top="Начало приёма">
+          <Input
+            onChange={(e) => this.changeStartDate(e)}
+            type="date"
+            label="Выберите начало приёма"
+          />
+        </FormLayoutGroup>
+        <FormLayoutGroup top="Последний день приёма">
+          <Input
+            onChange={(e) => this.changeEndDate(e)}
+            type="date"
+            label="Выберите конец приёма"
+          />
+        </FormLayoutGroup>
+        <FormLayoutGroup style={{ display: 'flex' }}>
+          <Button style={styles.button} size="l">Добавить</Button>
         </FormLayoutGroup>
         <Footer>
           Для добавления лекарства, нажмите на галочку в

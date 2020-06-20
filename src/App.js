@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import bridge from '@vkontakte/vk-bridge';
 import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
 import '@vkontakte/vkui/dist/vkui.css';
-
+import './panels/main.css';
 // eslint-disable-next-line import/extensions
 import MainPanel from './panels/MainPanel.jsx';
 
@@ -11,7 +11,6 @@ const App = () => {
   const [activePanel, setActivePanel] = useState('home');
   const [fetchedUser, setUser] = useState(null);
   const [popout, setPopout] = useState(<ScreenSpinner size="large" />);
-
   useEffect(() => {
     bridge.subscribe(({ detail: { type, data } }) => {
       if (type === 'VKWebAppUpdateConfig') {
@@ -29,7 +28,7 @@ const App = () => {
   }, []);
 
   return (
-    <MainPanel />
+    <MainPanel user={fetchedUser} />
   );
 };
 
