@@ -57,6 +57,11 @@ class AddAidPanel extends Component {
     };
   }
 
+  sendData() {
+    const { user } = this.props;
+    console.log(user, this.state);
+  }
+
   addTimes() {
     const { times } = this.state;
     const emptyTime = { dose: null, time: null };
@@ -166,7 +171,7 @@ class AddAidPanel extends Component {
         </FormLayoutGroup>
         <FormLayoutGroup>
           <Cell style={styles.cell}>
-            <Button style={styles.button} size="xl">Добавить в аптечку</Button>
+            <Button onClick={() => this.sendData()} style={styles.button} size="xl">Добавить в аптечку</Button>
           </Cell>
         </FormLayoutGroup>
       </FormLayout>

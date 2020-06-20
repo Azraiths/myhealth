@@ -18,7 +18,6 @@ import { ReactComponent as Recipe } from '../img/raspisanie_28.svg';
 class MainPanel extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       activeStory: 'aidKit',
       /**
@@ -43,6 +42,7 @@ class MainPanel extends React.Component {
   }
 
   render() {
+    const { user } = this.props;
     const osName = platform();
     const { activeStory, aidKitActivePanel, chosenMedicine } = this.state;
     return (
@@ -101,7 +101,7 @@ class MainPanel extends React.Component {
             >
               Добавить лекарство
             </PanelHeader>
-            <AddAidPanel />
+            <AddAidPanel user={user} />
           </Panel>
 
           <Panel id="aidInfo">
