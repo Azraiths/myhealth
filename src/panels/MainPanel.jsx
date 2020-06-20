@@ -18,7 +18,7 @@ class MainPanel extends React.Component {
     super(props);
 
     this.state = {
-      activeStory: 'more',
+      activeStory: 'aidKit',
       /**
        * Внутри главной панели Epic есть подразделы, как фрагмент в андроиде.
        * Для каждой главной панели если понадобится создаём свой стейт с дефолтным значением

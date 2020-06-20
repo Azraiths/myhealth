@@ -2,31 +2,33 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Footer,
-  FormLayout, FormLayoutGroup, Input, Select, Text,
+  FormLayout, FormLayoutGroup, Select, Separator, Text,
 } from '@vkontakte/vkui';
 
-//TODO: Заменить Text на правильный элемент
+// TODO: Заменить Text на правильный элемент
 const AidInfo = (props) => {
   const { name, type } = props;
+
+  const style = {
+    label: {
+      width: '100%',
+      padding: '0 11.5px',
+      display: 'inline-block',
+    },
+    separator: {
+      margin: '0 11.5px',
+    },
+  };
+
   return (
     <FormLayout>
       <FormLayoutGroup top="Название">
-        <Text>{name}</Text>
+        <Text style={style.label}>{name}</Text>
       </FormLayoutGroup>
       <FormLayoutGroup top="Единица измерения">
-        <Text>{type}</Text>
+        <Text style={style.label}>{type}</Text>
       </FormLayoutGroup>
-      <FormLayoutGroup top="Продолжительность приёма">
-        <Select defaultValue="endless">
-          <option value="endless">Без даты окончания</option>
-          <option value="week">1 неделя</option>
-          <option value="month">1 месяц</option>
-        </Select>
-      </FormLayoutGroup>
-      <Footer>
-        Для добавления лекарства, нажмите на галочку в
-        правом верхнем углу экрана.
-      </Footer>
+      <Separator style={style.separator} />
     </FormLayout>
   );
 };

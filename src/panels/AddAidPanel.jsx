@@ -3,7 +3,6 @@ import {
   Footer,
   FormLayout, FormLayoutGroup, Input, Select,
 } from '@vkontakte/vkui';
-import Icon28MoneyCircleOutline from '@vkontakte/icons/dist/28/money_circle_outline';
 
 // TODO: Добавить время приёма.
 //  В идеале давать пользователю выбирать частоту и расширить количество вариантов
