@@ -7,10 +7,10 @@ import {
   Text,
   Button,
 } from '@vkontakte/vkui';
-import { ReactComponent as Pill } from '../img/aptechka_28.svg';
-import styles from './styles';
-import EmptyStateAidKit from '../components/EmptyStateAidKit';
-import getExpenses from '../models/getExpenses';
+import { ReactComponent as Pill } from '../../img/aptechka_28.svg';
+import styles from '../styles';
+import EmptyStateAidKit from '../../components/EmptyStateAidKit';
+import getExpenses from '../../models/getExpenses';
 
 class ExpensesPanel extends Component {
   constructor(props) {

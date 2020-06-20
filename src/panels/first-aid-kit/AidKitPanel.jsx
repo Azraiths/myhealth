@@ -5,9 +5,9 @@ import {
 } from '@vkontakte/vkui';
 
 import PropTypes from 'prop-types';
-import { ReactComponent as Pill } from '../img/aptechka_28.svg';
-import EmptyStateAidKit from '../components/EmptyStateAidKit';
-import getAidKitTracking from '../models/getAidKitTracking';
+import { ReactComponent as Pill } from '../../img/aptechka_28.svg';
+import EmptyStateAidKit from '../../components/EmptyStateAidKit';
+import getAidKitTracking from '../../models/getAidKitTracking';
 
 Array.prototype.isEmpty = function () {
   return this.length === 0;

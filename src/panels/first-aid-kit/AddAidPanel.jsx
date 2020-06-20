@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import bridge from '@vkontakte/vk-bridge';
 import {
   Button, Cell, Div,
   FormLayout, FormLayoutGroup, Input, Select,
 } from '@vkontakte/vkui';
-import styles from './styles';
-import { ReactComponent as ConfirmLogo } from '../img/confirm_41.svg';
-import { ReactComponent as AddLogo } from '../img/add_41.svg';
-
-import pushReceipt from '../models/addReceipt';
+import getAidKitTracking from '../../models/getAidKitTracking';
+import styles from '../styles';
+import addTracking from '../../models/addTracking';
+import { ReactComponent as ConfirmLogo } from '../../img/confirm_41.svg';
+import { ReactComponent as AddLogo } from '../../img/add_41.svg';
 
 class TimeAndDoseList extends Component {
   constructor(props) {
@@ -42,14 +41,15 @@ class TimeAndDoseList extends Component {
   }
 }
 
-class CreateReceiptPanel extends Component {
+// TODO: Добавить время приёма.
+//  В идеале давать пользователю выбирать частоту и расширить количество вариантов
+class AddAidPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedUser: null,
       medical: 'Лекарство',
       medtype: 'Таблетка',
-      patient: '',
+      doctor: '',
       dateStart: '',
       dateEnd: '',
       times: [
@@ -66,31 +66,22 @@ class CreateReceiptPanel extends Component {
     const {
       medical,
       medtype,
-      patient,
-      selectedUser,
+      doctor,
       dateStart,
       dateEnd,
       times,
     } = this.state;
-
-    if (!selectedUser) return;
-
-    const doctorInfo = await bridge.send('VKWebAppGetUserInfo');
-
     const props = {
       medical,
       medtype,
+      doctor,
       dstart: dateStart,
       dfinish: dateEnd,
       user_id: user,
       times,
-      user_to: selectedUser.id,
-      doctor_name: `${doctorInfo.last_name} ${doctorInfo.first_name}`,
     };
-
-    const res = await pushReceipt(props);
-
-    this.props.onClose();
+    const res = await addTracking(props);
+    this.props.onModalClose();
   }
 
   addTimes() {
@@ -113,11 +104,8 @@ class CreateReceiptPanel extends Component {
     this.setState({ medtype: e.target.value });
   }
 
-  async changePatient(e) {
-    const friends = await bridge.send('VKWebAppGetFriends');
-    const friend = friends.users[0] ? friends.users[0] : null;
-
-    this.setState({ patient: `${friend.last_name} ${friend.first_name}`, selectedUser: friend });
+  changeDoctor(e) {
+    this.setState({ doctor: e.target.value });
   }
 
   changeStartDate(e) {
@@ -130,7 +118,7 @@ class CreateReceiptPanel extends Component {
 
   render() {
     const {
-      name, patient, dateStart, dateEnd, times,
+      name, doctor, dateStart, dateEnd, times,
     } = this.state;
     return (
       <FormLayout>
@@ -142,13 +130,12 @@ class CreateReceiptPanel extends Component {
             label="Введите название лекарства"
           />
         </FormLayoutGroup>
-        <FormLayoutGroup top="Пациент">
+        <FormLayoutGroup top="Доктор">
           <Input
             type="text"
-            onClick={async (e) => this.changePatient(e)}
-            readOnly
-            value={patient}
-            placeholder="Нажмите чтобы выбрать пациента"
+            onChange={(e) => this.changeDoctor(e)}
+            value={doctor}
+            placeholder="Введите имя доктора"
           />
         </FormLayoutGroup>
         <FormLayoutGroup top="Единицы измерения">
@@ -180,19 +167,19 @@ class CreateReceiptPanel extends Component {
         </FormLayoutGroup>
 
         {
-                    times.map((v, index) => (
+            times.map((v, index) => (
 
-                      <FormLayoutGroup
-                        top="Дозировка и время"
-                        key={index}
-                      >
-                        <TimeAndDoseList
-                          change={(e) => this.changeTimeAndDoze(e, index)}
-                          {...v}
-                        />
-                      </FormLayoutGroup>
-                    ))
-                }
+              <FormLayoutGroup
+                top="Дозировка и время"
+                key={index}
+              >
+                <TimeAndDoseList
+                  change={(e) => this.changeTimeAndDoze(e, index)}
+                  {...v}
+                />
+              </FormLayoutGroup>
+            ))
+        }
         <FormLayoutGroup>
           <Cell style={styles.cell}>
             <AddLogo
@@ -202,7 +189,7 @@ class CreateReceiptPanel extends Component {
         </FormLayoutGroup>
         <FormLayoutGroup>
           <Cell style={styles.cell}>
-            <Button onClick={() => this.sendData()} style={styles.button} size="xl">Отправить рецепт</Button>
+            <Button onClick={() => this.sendData()} style={styles.button} size="xl">Добавить в аптечку</Button>
           </Cell>
         </FormLayoutGroup>
       </FormLayout>
@@ -210,4 +197,4 @@ class CreateReceiptPanel extends Component {
   }
 }
 
-export default CreateReceiptPanel;
+export default AddAidPanel;

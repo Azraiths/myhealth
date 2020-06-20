@@ -8,17 +8,17 @@ import {
 } from '@vkontakte/vkui';
 import PanelHeaderButton from '@vkontakte/vkui/dist/es6/components/PanelHeaderButton/PanelHeaderButton';
 import Icon28MarketAddBadgeOutline from '@vkontakte/icons/dist/28/market_add_badge_outline';
-import AidKitPanel from './AidKitPanel';
-import SchedulePanel from './SchedulePandel';
-import ReceiptPanel from './ReceiptsPanel';
-import ExpensesPanel from './ExpensesPanel';
-import AddAidPanel from './AddAidPanel';
-import AidInfo from './AidInfo';
+import AidKitPanel from './first-aid-kit/AidKitPanel';
+import SchedulePanel from './schedule/SchedulePandel';
+import ReceiptPanel from './receipt/ReceiptsPanel';
+import ExpensesPanel from './expenses/ExpensesPanel';
+import AddAidPanel from './first-aid-kit/AddAidPanel';
+import AidInfo from './first-aid-kit/AidInfo';
 import styles from './styles';
 import { ReactComponent as Recipe } from '../img/raspisanie_28.svg';
 import AddExpensesModal from '../components/AddExpensesModal';
-import ReceiptInfo from './ReceiptInfo';
-import CreateReceiptPanel from './CreateReceiptPanel';
+import ReceiptInfo from './receipt/ReceiptInfo';
+import CreateReceiptPanel from './receipt/CreateReceiptPanel';
 import { ReactComponent as Schedule } from '../img/raspisanie_new_28.svg';
 
 class MainPanel extends React.Component {

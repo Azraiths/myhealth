@@ -4,9 +4,9 @@ import {
 } from '@vkontakte/vkui';
 
 import PropTypes from 'prop-types';
-import { ReactComponent as Pill } from '../img/aptechka_28.svg';
-import EmptyStateAidKit from '../components/EmptyStateAidKit';
-import getDoctorReceipts from '../models/getDoctorReceipts';
+import { ReactComponent as Pill } from '../../img/aptechka_28.svg';
+import EmptyStateAidKit from '../../components/EmptyStateAidKit';
+import getDoctorReceipts from '../../models/getDoctorReceipts';
 
 class ReceiptsPanel extends Component {
   constructor(props) {

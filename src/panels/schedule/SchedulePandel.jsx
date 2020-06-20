@@ -5,10 +5,10 @@ import {
 } from '@vkontakte/vkui';
 
 import PropTypes from 'prop-types';
-import { ReactComponent as Pill } from '../img/aptechka_28.svg';
-import EmptyStateAidKit from '../components/EmptyStateAidKit';
-import getTrackUntilMidnight from '../models/getTrackUntilMidnight';
-import getTrackingFullDay from '../models/getTrackingFullDay';
+import { ReactComponent as Pill } from '../../img/aptechka_28.svg';
+import EmptyStateAidKit from '../../components/EmptyStateAidKit';
+import getTrackUntilMidnight from '../../models/getTrackUntilMidnight';
+import getTrackingFullDay from '../../models/getTrackingFullDay';
 
 Array.prototype.isEmpty = function () {
   return this.length === 0;
