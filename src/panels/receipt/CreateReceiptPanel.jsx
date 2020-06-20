@@ -8,7 +8,7 @@ import styles from '../styles';
 import { ReactComponent as ConfirmLogo } from '../../img/confirm_41.svg';
 import { ReactComponent as AddLogo } from '../../img/add_41.svg';
 
-import pushReceipt from '../../models/addReceipt';
+import pushReceipt from '../../api/addReceipt';
 
 class TimeAndDoseList extends Component {
   constructor(props) {

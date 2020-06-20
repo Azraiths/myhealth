@@ -6,7 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import { ReactComponent as Pill } from '../../img/aptechka_28.svg';
 import EmptyStateAidKit from '../../components/EmptyStateAidKit';
-import getDoctorReceipts from '../../models/getDoctorReceipts';
+import getDoctorReceipts from '../../api/getDoctorReceipts';
 
 class ReceiptsPanel extends Component {
   constructor(props) {

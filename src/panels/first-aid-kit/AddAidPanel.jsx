@@ -3,9 +3,9 @@ import {
   Button, Cell, Div,
   FormLayout, FormLayoutGroup, Input, Select,
 } from '@vkontakte/vkui';
-import getAidKitTracking from '../../models/getAidKitTracking';
+import getAidKitTracking from '../../api/getAidKitTracking';
 import styles from '../styles';
-import addTracking from '../../models/addTracking';
+import addTracking from '../../api/addTracking';
 import { ReactComponent as ConfirmLogo } from '../../img/confirm_41.svg';
 import { ReactComponent as AddLogo } from '../../img/add_41.svg';
 

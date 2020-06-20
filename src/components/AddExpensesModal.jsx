@@ -10,7 +10,7 @@ import {
 } from '@vkontakte/vkui';
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import Icon24Done from '@vkontakte/icons/dist/24/done';
-import addExpenses from '../models/addExpenses';
+import addExpenses from '../api/addExpenses';
 
 class AddExpensesModal extends Component {
   constructor(props) {

@@ -7,8 +7,8 @@ import {
 import PropTypes from 'prop-types';
 import { ReactComponent as Pill } from '../../img/aptechka_28.svg';
 import EmptyStateAidKit from '../../components/EmptyStateAidKit';
-import getTrackUntilMidnight from '../../models/getTrackUntilMidnight';
-import getTrackingFullDay from '../../models/getTrackingFullDay';
+import getTrackUntilMidnight from '../../api/getTrackUntilMidnight';
+import getTrackingFullDay from '../../api/getTrackingFullDay';
 
 Array.prototype.isEmpty = function () {
   return this.length === 0;
