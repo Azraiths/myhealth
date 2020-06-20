@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 
 import {
-  Group, Card, CardGrid, Cell, Placeholder,
+  Group, Card, CardGrid, Cell, Placeholder, Avatar,
 } from '@vkontakte/vkui';
-import Icon28MoneyCircleOutline from '@vkontakte/icons/dist/28/money_circle_outline';
 
 import PropTypes from 'prop-types';
 import { ReactComponent as Pill } from '../img/aptechka_28.svg';
-import AidInfo from './AidInfo';
 
 Array.prototype.isEmpty = function () {
   return this.length === 0;
@@ -45,7 +43,7 @@ class AidKitPanel extends Component {
         <CardGrid>
           {
             medicines.map((v) => (
-              <Card key={v.name} onClick={() => this.props.goToInfo(v)} size="l" mode="shadow">
+              <Card key={v.name} onClick={() => goToInfo(v)} size="l" mode="shadow">
                 <Cell before={<Avatar src={pill} />} description={v.description}>{v.name}</Cell>
               </Card>
             ))
