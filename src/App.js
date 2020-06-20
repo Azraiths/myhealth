@@ -32,10 +32,13 @@ class App extends React.Component {
   render() {
     const { user } = this.state;
 
-    console.log(user);
-    return (
-      <MainPanel user={user} />
-    );
+    if (user) {
+      return (
+        <MainPanel user={user.id} />
+      );
+    }
+
+    return (<ScreenSpinner />);
   }
 }
 
