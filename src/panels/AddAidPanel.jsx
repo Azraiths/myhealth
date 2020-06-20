@@ -102,7 +102,7 @@ class AddAidPanel extends Component {
   }
 
   changeType(e) {
-    this.setState({ type: e.target.value });
+    this.setState({ medtype: e.target.value });
   }
 
   changeDoctor(e) {
