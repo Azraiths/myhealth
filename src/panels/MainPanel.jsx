@@ -7,6 +7,7 @@ import {
   View, Panel, Epic, TabbarItem, Tabbar, PanelHeader, platform, ANDROID,
 } from '@vkontakte/vkui';
 import PanelHeaderButton from '@vkontakte/vkui/dist/es6/components/PanelHeaderButton/PanelHeaderButton';
+import Icon28MarketAddBadgeOutline from '@vkontakte/icons/dist/28/market_add_badge_outline';
 import AidKitPanel from './AidKitPanel';
 import SchedulePanel from './SchedulePandel';
 import ReceiptPanel from './ReceiptsPanel';
@@ -86,7 +87,7 @@ class MainPanel extends React.Component {
               data-story="aidKit"
               text="Аптечка"
             >
-              <Icon28MoneyCircleOutline />
+              <Icon28MarketAddBadgeOutline />
             </TabbarItem>
             <TabbarItem
               onClick={this.onStoryChange}
