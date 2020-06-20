@@ -18,7 +18,7 @@ class ReceiptsPanel extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
-    const res = await getDoctorReceipts(404);
+    const res = await getDoctorReceipts(user);
     const parsed = res.map((v) => {
       const times = JSON.parse(v.times);
       return {

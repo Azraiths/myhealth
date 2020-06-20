@@ -33,14 +33,15 @@ class SchedulePanel extends Component {
   }
 
   async getAllTracking() {
-    const res = await getTrackingFullDay(404);
+    const { user } = this.props;
+    const res = await getTrackingFullDay(user);
     this.setState({ medicines: res, isLinkVisible: false });
   }
 
   async componentDidMount() {
     const { user } = this.props;
 
-    const res = await getTrackUntilMidnight(404);
+    const res = await getTrackUntilMidnight(user);
 
     this.setState({ medicines: res });
   }
@@ -73,7 +74,10 @@ class SchedulePanel extends Component {
         </CardGrid>
         { medicines.isEmpty()
           && (
-          <EmptyStateAidKit />
+          <EmptyStateAidKit
+            header="Лекарства не назначены."
+            message="Похоже, у вас нет назначенных лекарств на ближайшее время. Чтобы добавить лекарство, перейдите в аптечку."
+          />
           )}
 
       </Group>
