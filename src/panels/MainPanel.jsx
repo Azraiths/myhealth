@@ -129,7 +129,7 @@ class MainPanel extends React.Component {
         </View>
         <View id="recipe" activePanel="recipe">
           <Panel id="recipe">
-            <PanelHeader>Рецепты</PanelHeader>
+            <PanelHeader>Расписание</PanelHeader>
             {
                   user
                     ? (
