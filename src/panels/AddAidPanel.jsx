@@ -3,7 +3,9 @@ import {
   Button, Cell, Div,
   FormLayout, FormLayoutGroup, Input, Select,
 } from '@vkontakte/vkui';
+import getAidKitTracking from '../models/getAidKitTracking';
 import styles from './styles';
+import addTracking from '../models/addTracking';
 
 class TimeAndDoseList extends Component {
   constructor(props) {
@@ -43,8 +45,8 @@ class AddAidPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'Лекарство',
-      type: 'pills',
+      medical: 'Лекарство',
+      medtype: 'pills',
       doctor: '',
       dateStart: '',
       dateEnd: '',
@@ -57,9 +59,28 @@ class AddAidPanel extends Component {
     };
   }
 
-  sendData() {
+  async sendData() {
     const { user } = this.props;
-    console.log(user, this.state);
+    const {
+      medical,
+      medtype,
+      doctor,
+      dateStart,
+      dateEnd,
+      times,
+    } = this.state;
+    const props = {
+      medical,
+      medtype,
+      doctor,
+      dstart: dateStart,
+      dfinish: dateEnd,
+      user_id: user,
+      times,
+    };
+    console.log(props);
+    const res = await addTracking(props);
+    console.log(res);
   }
 
   addTimes() {
@@ -75,7 +96,7 @@ class AddAidPanel extends Component {
   }
 
   changeName(e) {
-    this.setState({ name: e.target.value });
+    this.setState({ medical: e.target.value });
   }
 
   changeType(e) {

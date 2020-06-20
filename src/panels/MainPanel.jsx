@@ -43,6 +43,7 @@ class MainPanel extends React.Component {
 
   render() {
     const { user } = this.props;
+    console.log(user);
     const osName = platform();
     const { activeStory, aidKitActivePanel, chosenMedicine } = this.state;
     return (
@@ -89,7 +90,16 @@ class MainPanel extends React.Component {
             >
               Аптечка
             </PanelHeader>
-            <AidKitPanel goToInfo={(e) => this.goToInfo(e)} />
+            {
+                  user
+                    ? (
+                      <AidKitPanel
+                        user={user}
+                        goToInfo={(e) => this.goToInfo(e)}
+                      />
+                    ) : ''
+              }
+
           </Panel>
           <Panel id="addNewAid">
             <PanelHeader

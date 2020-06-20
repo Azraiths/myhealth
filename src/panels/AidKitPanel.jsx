@@ -6,6 +6,8 @@ import {
 
 import PropTypes from 'prop-types';
 import { ReactComponent as Pill } from '../img/aptechka_28.svg';
+import EmptyStateAidKit from '../components/EmptyStateAidKit';
+import getAidKitTracking from '../models/getAidKitTracking';
 
 Array.prototype.isEmpty = function () {
   return this.length === 0;
@@ -15,23 +17,22 @@ class AidKitPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      medicines: [
-        {
-          user_id: '404',
-          medical: 'Panadol',
-          doctor: 'Сидоров',
-          type: 'Таблетки',
-          dstart: '2020-06-10',
-          dfinish: '2020-06-25',
-          times: [
-            {
-              dose: '1 таблетка',
-              time: '10:00',
-            },
-          ],
-        },
-      ],
+      medicines: [],
     };
+  }
+
+  async componentDidMount() {
+    const { user } = this.props;
+    console.log(user);
+    const res = await getAidKitTracking(user);
+    // const times = JSON.parse(res.times);
+    const parsed = res.map((v) => {
+      const times = JSON.parse(v.times);
+      return {
+        ...v, times,
+      };
+    });
+    this.setState({ medicines: parsed });
   }
 
   render() {
@@ -51,14 +52,7 @@ class AidKitPanel extends Component {
         </CardGrid>
         { medicines.isEmpty()
           && (
-          <Placeholder
-            stretched
-            icon={<Pill style={{ height: '48px', width: '48px' }} />}
-            header="В вашей аптечке пусто."
-          >
-            Лекарства можно добавить кнопкой
-            в правом верхнем углу экрана.
-          </Placeholder>
+          <EmptyStateAidKit />
           )}
 
       </Group>
@@ -68,7 +62,7 @@ class AidKitPanel extends Component {
 
 AidKitPanel.propTypes = {
   goToInfo: PropTypes.func.isRequired,
-
+  user: PropTypes.number.isRequired,
 };
 
 export default AidKitPanel;
