@@ -139,14 +139,6 @@ class AddAidPanel extends Component {
             label="Выберите конец приёма"
           />
         </FormLayoutGroup>
-        <FormLayoutGroup>
-          <Button
-            style={styles.button}
-            onClick={() => this.addTimes()}
-          >
-            Добавить время приема
-          </Button>
-        </FormLayoutGroup>
 
         {
             times.map((v, index) => (
@@ -162,10 +154,20 @@ class AddAidPanel extends Component {
               </FormLayoutGroup>
             ))
         }
-
         <FormLayoutGroup>
           <Cell style={styles.cell}>
-            <Button style={styles.button} size="xl">Добавить</Button>
+            <Button
+              style={styles.button}
+              onClick={() => this.addTimes()}
+              size="xl"
+            >
+              Добавить время приема
+            </Button>
+          </Cell>
+        </FormLayoutGroup>
+        <FormLayoutGroup>
+          <Cell style={styles.cell}>
+            <Button style={styles.button} size="xl">Добавить в аптечку</Button>
           </Cell>
         </FormLayoutGroup>
       </FormLayout>
