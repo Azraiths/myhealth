@@ -34,7 +34,16 @@ class ExpensesPanel extends Component {
       <Group>
         {
           expenses.length === 0 ? (
-            <EmptyStateAidKit />
+            <EmptyStateAidKit
+              action={(
+                <Button
+                  onClick={() => this.props.openExpensesModal()}
+                  style={styles.button}
+                >
+                  Добавить купленное лекарство
+                </Button>
+)}
+            />
           )
             : (
               <List>

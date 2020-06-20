@@ -18,6 +18,7 @@ import { ReactComponent as Recipe } from '../img/raspisanie_28.svg';
 import AddExpensesModal from '../components/AddExpensesModal';
 import ReceiptInfo from './ReceiptInfo';
 import CreateReceiptPanel from './CreateReceiptPanel';
+import { ReactComponent as Schedule } from '../img/raspisanie_new_28.svg';
 
 class MainPanel extends React.Component {
   constructor(props) {
@@ -93,7 +94,7 @@ class MainPanel extends React.Component {
               data-story="schedule"
               text="Расписание"
             >
-              <Recipe style={{ fill: activeStory === 'schedule' ? styles.icon.color : '#99a2ad' }} />
+              <Schedule style={{ fill: activeStory === 'schedule' ? styles.icon.color : '#99a2ad' }} />
             </TabbarItem>
             <TabbarItem
               onClick={this.onStoryChange}

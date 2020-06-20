@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 import { ReactComponent as Pill } from '../img/aptechka_28.svg';
 
 const EmptyStateAidKit = (props) => {
-  const { placeholderIcon, header, message } = props;
+  const {
+    placeholderIcon, header, message, action,
+  } = props;
 
   const properties = {
+    action: action || null,
     icon: placeholderIcon || <Pill style={{ height: '48px', width: '48px' }} />,
     header: header || 'В вашей аптечке пусто.',
     message: message || 'Лекарства можно добавить кнопкой в правом верхнем углу экрана.',
