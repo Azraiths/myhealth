@@ -40,7 +40,6 @@ class SchedulePanel extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
-
     const res = await getTrackUntilMidnight(user);
 
     this.setState({ medicines: res });
