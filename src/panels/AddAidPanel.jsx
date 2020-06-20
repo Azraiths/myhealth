@@ -1,11 +1,42 @@
 import React, { Component } from 'react';
 import {
-  Button,
-  Footer,
+  Button, Cell, Div,
   FormLayout, FormLayoutGroup, Input, Select,
 } from '@vkontakte/vkui';
 import Icon28MoneyCircleOutline from '@vkontakte/icons/dist/28/money_circle_outline';
 import styles from './styles';
+
+class TimeAndDoseList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      time: null,
+      dose: null,
+    };
+  }
+
+  onChange(e, type) {
+    this.setState({ [type]: e.target.value });
+    this.props.change(this.state);
+  }
+
+  render() {
+    return (
+      <Div>
+        <Input
+          onChange={(e) => this.onChange(e, 'time')}
+          type="time"
+        />
+        <Input
+          style={{ marginTop: '1rem' }}
+          onChange={(e) => this.onChange(e, 'dose')}
+          type="text"
+          placeholder="Дозировка"
+        />
+      </Div>
+    );
+  }
+}
 
 // TODO: Добавить время приёма.
 //  В идеале давать пользователю выбирать частоту и расширить количество вариантов
@@ -18,7 +49,25 @@ class AddAidPanel extends Component {
       doctor: '',
       dateStart: '',
       dateEnd: '',
+      times: [
+        {
+          dose: '1 таблетка',
+          time: '10:00',
+        },
+      ],
     };
+  }
+
+  addTimes() {
+    const { times } = this.state;
+    const emptyTime = { dose: null, time: null };
+    this.setState({ times: [...times, emptyTime] });
+  }
+
+  changeTimeAndDoze(e, index) {
+    const { times } = this.state;
+    times[index] = e;
+    this.setState({ times });
   }
 
   changeName(e) {
@@ -43,7 +92,7 @@ class AddAidPanel extends Component {
 
   render() {
     const {
-      name, doctor, dateStart, dateEnd,
+      name, doctor, dateStart, dateEnd, times,
     } = this.state;
     return (
       <FormLayout>
@@ -60,7 +109,7 @@ class AddAidPanel extends Component {
             type="text"
             onChange={(e) => this.changeDoctor(e)}
             value={doctor}
-            label="Введите название лекарства"
+            placeholder="Введите имя доктора"
           />
         </FormLayoutGroup>
         <FormLayoutGroup top="Единицы измерения">
@@ -77,6 +126,7 @@ class AddAidPanel extends Component {
         <FormLayoutGroup top="Начало приёма">
           <Input
             onChange={(e) => this.changeStartDate(e)}
+            value={dateStart}
             type="date"
             label="Выберите начало приёма"
           />
@@ -84,17 +134,40 @@ class AddAidPanel extends Component {
         <FormLayoutGroup top="Последний день приёма">
           <Input
             onChange={(e) => this.changeEndDate(e)}
+            value={dateEnd}
             type="date"
             label="Выберите конец приёма"
           />
         </FormLayoutGroup>
-        <FormLayoutGroup style={{ display: 'flex' }}>
-          <Button style={styles.button} size="l">Добавить</Button>
+        <FormLayoutGroup>
+          <Button
+            style={styles.button}
+            onClick={() => this.addTimes()}
+          >
+            Добавить время приема
+          </Button>
         </FormLayoutGroup>
-        <Footer>
-          Для добавления лекарства, нажмите на галочку в
-          правом верхнем углу экрана.
-        </Footer>
+
+        {
+            times.map((v, index) => (
+
+              <FormLayoutGroup
+                top="Дозировка и время"
+                key={index}
+              >
+                <TimeAndDoseList
+                  change={(e) => this.changeTimeAndDoze(e, index)}
+                  {...v}
+                />
+              </FormLayoutGroup>
+            ))
+        }
+
+        <FormLayoutGroup>
+          <Cell style={styles.cell}>
+            <Button style={styles.button} size="xl">Добавить</Button>
+          </Cell>
+        </FormLayoutGroup>
       </FormLayout>
     );
   }
