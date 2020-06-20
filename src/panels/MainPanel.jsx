@@ -172,7 +172,12 @@ class MainPanel extends React.Component {
         >
           <Panel id="expenses">
             <PanelHeader>Расходы</PanelHeader>
-            <ExpensesPanel openExpensesModal={(e) => this.openExpensesModal(e)} />
+            {
+                  user
+                    ? (
+                      <ExpensesPanel user={user} openExpensesModal={(e) => this.openExpensesModal(e)} />
+                    ) : ''
+              }
           </Panel>
         </View>
       </Epic>

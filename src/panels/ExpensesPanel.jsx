@@ -10,6 +10,7 @@ import {
 import { ReactComponent as Pill } from '../img/aptechka_28.svg';
 import styles from './styles';
 import EmptyStateAidKit from '../components/EmptyStateAidKit';
+import getExpenses from '../models/getExpenses';
 
 class ExpensesPanel extends Component {
   constructor(props) {
@@ -17,28 +18,14 @@ class ExpensesPanel extends Component {
     this.state = {
       activeModal: null,
       expenses: [
-        {
-          user_id: 404,
-          medical: 'Анальгин',
-          pharm: 'Сидоров',
-          dpurch: '2020-06-20',
-          amount: '1 Пачка, 20шт.',
-          cost: 500,
-        },
-        {
-          user_id: 404,
-          medical: 'Анальгин',
-          pharm: 'Сидоров',
-          dpurch: '2020-06-05',
-          amount: '1 Пачка, 40шт.',
-          cost: 450,
-        },
       ],
     };
   }
 
-  onClose(e) {
-    this.setState({ activeModal: null });
+  async componentDidMount() {
+    const { user } = this.props;
+    const data = await getExpenses(user);
+    this.setState({ expenses: data });
   }
 
   render() {

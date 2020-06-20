@@ -37,9 +37,7 @@ class AddExpensesModal extends Component {
       amount,
       pharm: pharmacyName,
     };
-    console.log(data);
     const res = await addExpenses(data);
-    console.log(res);
     this.props.onModalClose(e);
   }
 
