@@ -23,7 +23,7 @@ class AidKitPanel extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
-    console.log(user);
+
     const res = await getAidKitTracking(user);
     // const times = JSON.parse(res.times);
     const parsed = res.map((v) => {

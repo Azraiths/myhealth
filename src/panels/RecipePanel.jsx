@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
 import {
-  Group, Card, CardGrid, Cell, Placeholder, Text,
+  Group, Card, CardGrid, Cell, Text,
 } from '@vkontakte/vkui';
 
 import PropTypes from 'prop-types';
 import { ReactComponent as Pill } from '../img/aptechka_28.svg';
 import EmptyStateAidKit from '../components/EmptyStateAidKit';
+import getTrackUntilMidnight from '../models/getTrackUntilMidnight';
+import getAidKitTracking from '../models/getAidKitTracking';
 
 Array.prototype.isEmpty = function () {
   return this.length === 0;
@@ -16,18 +18,6 @@ class RecipePanel extends Component {
     super(props);
     this.state = {
       medicines: [
-        {
-          time: '10:00',
-          type: 'Таблетки',
-          dose: '1.5 половинки',
-          medical: 'Супрастин',
-        },
-        {
-          time: '12:00',
-          type: 'Укол',
-          dose: '5мг',
-          medical: 'Дексаметазон',
-        },
       ],
     };
   }
@@ -39,6 +29,14 @@ class RecipePanel extends Component {
       return today.getHours() - hours;
     }
     return false;
+  }
+
+  async componentDidMount() {
+    const { user } = this.props;
+
+    const res = await getTrackUntilMidnight(404);
+
+    this.setState({ medicines: res });
   }
 
   render() {
@@ -53,7 +51,7 @@ class RecipePanel extends Component {
           {
               medicines.map((v) => (
                 <Card key={v.medical} onClick={() => goToInfo(v)} size="l" mode="shadow">
-                  <Cell before={<Text style={styles.font}>{v.time}</Text>} description={`${v.type} - ${v.dose}`}>{v.medical}</Cell>
+                  <Cell before={<Text style={styles.font}>{v.time}</Text>} description={`${v.medtype} - ${v.dose}`}>{v.medical}</Cell>
                 </Card>
               ))
             }

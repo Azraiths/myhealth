@@ -142,7 +142,7 @@ class AddAidPanel extends Component {
         <FormLayoutGroup top="Единицы измерения">
           <Select
             onChange={(e) => this.changeType(e)}
-            defaultValue="pills"
+            defaultValue="Таблетки"
           >
             <option value="Таблетки">Таблетки</option>
             <option value="Сироп">Сироп</option>

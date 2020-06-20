@@ -43,7 +43,6 @@ class MainPanel extends React.Component {
 
   render() {
     const { user } = this.props;
-    console.log(user);
     const osName = platform();
     const { activeStory, aidKitActivePanel, chosenMedicine } = this.state;
     return (
@@ -131,7 +130,15 @@ class MainPanel extends React.Component {
         <View id="recipe" activePanel="recipe">
           <Panel id="recipe">
             <PanelHeader>Рецепты</PanelHeader>
-            <RecipePanel />
+            {
+                  user
+                    ? (
+                      <RecipePanel
+                        user={user}
+                      />
+                    ) : ''
+              }
+
           </Panel>
         </View>
         <View id="expenses" activePanel="expenses">
