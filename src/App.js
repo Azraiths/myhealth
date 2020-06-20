@@ -6,12 +6,16 @@ import './panels/main.css';
 // eslint-disable-next-line import/extensions
 import MainPanel from './panels/MainPanel.jsx';
 
-const App = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [activePanel, setActivePanel] = useState('home');
-  const [fetchedUser, setUser] = useState(null);
-  const [popout, setPopout] = useState(<ScreenSpinner size="large" />);
-  useEffect(() => {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      user: null,
+    };
+  }
+
+  async componentDidMount() {
     bridge.subscribe(({ detail: { type, data } }) => {
       if (type === 'VKWebAppUpdateConfig') {
         const schemeAttribute = document.createAttribute('scheme');
@@ -19,17 +23,20 @@ const App = () => {
         document.body.attributes.setNamedItem(schemeAttribute);
       }
     });
-    async function fetchData() {
-      const user = await bridge.send('VKWebAppGetUserInfo');
-      setUser(user);
-      setPopout(null);
-    }
-    fetchData();
-  }, []);
 
-  return (
-    <MainPanel user={fetchedUser} />
-  );
-};
+    const user = await bridge.send('VKWebAppGetUserInfo');
+
+    this.setState({ user });
+  }
+
+  render() {
+    const { user } = this.state;
+
+    console.log(user);
+    return (
+      <MainPanel user={user} />
+    );
+  }
+}
 
 export default App;
