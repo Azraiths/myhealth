@@ -7,7 +7,7 @@ import {
 
 const AidInfo = (props) => {
   const {
-    user_id, medical, type, doctor, dstart, dfinish, times,
+    user_id, medical, medtype, doctor, dstart, dfinish, times,
   } = props;
 
   const style = {
@@ -46,7 +46,7 @@ const AidInfo = (props) => {
         <Text style={style.topLabel}>{doctor}</Text>
       </FormLayoutGroup>
       <FormLayoutGroup top="Тип">
-        <Text style={style.topLabel}>{type}</Text>
+        <Text style={style.topLabel}>{medtype}</Text>
       </FormLayoutGroup>
       <Separator style={style.separator} />
       <FormLayout>

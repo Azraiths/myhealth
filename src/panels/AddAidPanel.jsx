@@ -6,6 +6,8 @@ import {
 import getAidKitTracking from '../models/getAidKitTracking';
 import styles from './styles';
 import addTracking from '../models/addTracking';
+import { ReactComponent as ConfirmLogo } from '../img/confirm_41.svg';
+import { ReactComponent as AddLogo } from '../img/add_41.svg';
 
 class TimeAndDoseList extends Component {
   constructor(props) {
@@ -46,7 +48,7 @@ class AddAidPanel extends Component {
     super(props);
     this.state = {
       medical: 'Лекарство',
-      medtype: 'pills',
+      medtype: 'Таблетка',
       doctor: '',
       dateStart: '',
       dateEnd: '',
@@ -142,10 +144,10 @@ class AddAidPanel extends Component {
             onChange={(e) => this.changeType(e)}
             defaultValue="pills"
           >
-            <option value="pills">Таблетки</option>
-            <option value="syrup">Сироп</option>
-            <option value="injection">Инъекция</option>
-            <option value="lenses">Линзы</option>
+            <option value="Таблетки">Таблетки</option>
+            <option value="Сироп">Сироп</option>
+            <option value="Инъекция">Инъекция</option>
+            <option value="Линзы">Линзы</option>
           </Select>
         </FormLayoutGroup>
         <FormLayoutGroup top="Начало приёма">
@@ -181,13 +183,9 @@ class AddAidPanel extends Component {
         }
         <FormLayoutGroup>
           <Cell style={styles.cell}>
-            <Button
-              style={styles.button}
+            <AddLogo
               onClick={() => this.addTimes()}
-              size="xl"
-            >
-              Добавить время приема
-            </Button>
+            />
           </Cell>
         </FormLayoutGroup>
         <FormLayoutGroup>
