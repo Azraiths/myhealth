@@ -4,7 +4,7 @@ import Icon28AddOutline from '@vkontakte/icons/dist/28/add_outline';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import {
-  View, Panel, Epic, TabbarItem, Tabbar, PanelHeader, platform, ANDROID,
+  View, Panel, Epic, TabbarItem, Tabbar, PanelHeader, platform, ANDROID, Button, Cell,
 } from '@vkontakte/vkui';
 import PanelHeaderButton from '@vkontakte/vkui/dist/es6/components/PanelHeaderButton/PanelHeaderButton';
 import AidKitPanel from './AidKitPanel';
@@ -79,16 +79,20 @@ class MainPanel extends React.Component {
         <View id="aidKit" activePanel={aidKitActivePanel}>
           <Panel id="aidKit">
             <PanelHeader
-              right={(
-                <PanelHeaderButton onClick={() => this.setState({ aidKitActivePanel: 'addNewAid' })}>
-                  <Icon28AddOutline style={styles.icon} />
-                </PanelHeaderButton>
-              )}
               separator={false}
             >
               Аптечка
             </PanelHeader>
             <AidKitPanel goToInfo={(e) => this.goToInfo(e)} />
+            <Cell style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button
+                size="xl"
+                style={{ ...styles.button }}
+                onClick={() => this.setState({ aidKitActivePanel: 'addNewAid' })}
+              >
+                Добавить лекарство
+              </Button>
+            </Cell>
           </Panel>
           <Panel id="addNewAid">
             <PanelHeader
