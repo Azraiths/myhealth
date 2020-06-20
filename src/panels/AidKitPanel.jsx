@@ -45,7 +45,7 @@ class AidKitPanel extends Component {
           {
             medicines.map((v) => (
               <Card key={v.medical} onClick={() => goToInfo(v)} size="l" mode="shadow">
-                <Cell before={<Pill />} description={`Назначение сделал: ${v.doctor}`}>{v.medical}</Cell>
+                <Cell before={<Pill style={{ paddingRight: '10px' }} width="42px" height="42px" />} description={`Назначение сделал: ${v.doctor}`}>{v.medical}</Cell>
               </Card>
             ))
           }

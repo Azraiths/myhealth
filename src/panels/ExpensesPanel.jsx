@@ -54,7 +54,7 @@ class ExpensesPanel extends Component {
                           after={<Text style={{ fontWeight: 'bold' }}>{`-${v.cost}₽`}</Text>}
                           text={v.amount}
                           caption={v.dpurch}
-                          before={<Pill width="48px" height="48px" style={{ paddingRight: '10px' }} />}
+                          before={<Pill width="42px" height="42px" style={{ paddingRight: '10px' }} />}
                         >
                           {v.medical}
                         </RichCell>
