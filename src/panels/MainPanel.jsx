@@ -12,13 +12,14 @@ import RecipePanel from './RecipePanel';
 import ExpensesPanel from './ExpensesPanel';
 import AddAidPanel from './AddAidPanel';
 import AidInfo from './AidInfo';
+import styles from './styles';
 
 class MainPanel extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      activeStory: 'more',
+      activeStory: 'aidKit',
       /**
        * Внутри главной панели Epic есть подразделы, как фрагмент в андроиде.
        * Для каждой главной панели если понадобится создаём свой стейт с дефолтным значением
@@ -37,7 +38,6 @@ class MainPanel extends React.Component {
   }
 
   goToInfo(medicine) {
-    console.log(medicine);
     this.setState({ aidKitActivePanel: 'aidInfo', chosenMedicine: medicine });
   }
 
@@ -79,7 +79,11 @@ class MainPanel extends React.Component {
         <View id="aidKit" activePanel={aidKitActivePanel}>
           <Panel id="aidKit">
             <PanelHeader
-              right={<PanelHeaderButton onClick={() => this.setState({ aidKitActivePanel: 'addNewAid' })}><Icon28AddOutline /></PanelHeaderButton>}
+              right={(
+                <PanelHeaderButton onClick={() => this.setState({ aidKitActivePanel: 'addNewAid' })}>
+                  <Icon28AddOutline style={styles.icon} />
+                </PanelHeaderButton>
+              )}
               separator={false}
             >
               Аптечка
@@ -90,7 +94,7 @@ class MainPanel extends React.Component {
             <PanelHeader
               left={(
                 <PanelHeaderButton onClick={() => this.setState({ aidKitActivePanel: 'aidKit' })}>
-                  {osName === ANDROID ? <Icon24Back /> : <Icon28ChevronBack />}
+                  {osName === ANDROID ? <Icon24Back style={styles.icon} /> : <Icon28ChevronBack style={styles.icon} />}
                 </PanelHeaderButton>
                 )}
             >

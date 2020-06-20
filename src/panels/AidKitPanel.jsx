@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Group, Card, CardGrid, Cell,
+  Group, Card, CardGrid, Cell, Avatar,
 } from '@vkontakte/vkui';
 import Icon28MoneyCircleOutline from '@vkontakte/icons/dist/28/money_circle_outline';
+import pill from '../img/aptechka_28.svg';
 
 class AidKitPanel extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class AidKitPanel extends Component {
           {
             medicines.map((v) => (
               <Card key={v.name} onClick={() => this.props.goToInfo(v)} size="l" mode="shadow">
-                <Cell before={<Icon28MoneyCircleOutline />} description={v.description}>{v.name}</Cell>
+                <Cell before={<Avatar src={pill} />} description={v.description}>{v.name}</Cell>
               </Card>
             ))
           }
