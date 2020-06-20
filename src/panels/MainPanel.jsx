@@ -15,6 +15,7 @@ import AddAidPanel from './AddAidPanel';
 import AidInfo from './AidInfo';
 import styles from './styles';
 import { ReactComponent as Recipe } from '../img/raspisanie_28.svg';
+import AddExpensesModal from '../components/AddExpensesModal';
 import ReceiptInfo from './ReceiptInfo';
 import CreateReceiptPanel from './CreateReceiptPanel';
 
@@ -22,6 +23,7 @@ class MainPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      modal: null,
       activeStory: 'aidKit',
       /**
        * Внутри главной панели Epic есть подразделы, как фрагмент в андроиде.
@@ -42,8 +44,24 @@ class MainPanel extends React.Component {
     this.setState({ activeStory: e.currentTarget.dataset.story });
   }
 
+  /**
+     * Переходим в панель информации о медикаменте и перекидываем нужные пропсы
+     * @param medicine
+     */
   goToInfo(medicine) {
     this.setState({ aidKitActivePanel: 'aidInfo', chosenMedicine: medicine });
+  }
+
+  /**
+     * При открытии панели ловим ивент из AddExpensesModal, ставим активную панель в ModalRoot
+     * @param e String название панели
+     */
+  openExpensesModal(e) {
+    this.setState({ modal: 'addBoughtMedicine' });
+  }
+
+  onModalClose() {
+    this.setState({ modal: null });
   }
 
   goToReceipt(receipt) {
@@ -206,10 +224,25 @@ class MainPanel extends React.Component {
             <ReceiptInfo {...selectedReceipt} />
           </Panel>
         </View>
-        <View id="expenses" activePanel="expenses">
+        <View
+          id="expenses"
+          activePanel="expenses"
+          modal={(
+            <AddExpensesModal
+              user={user}
+              onModalClose={(e) => this.onModalClose(e)}
+              activeModal={this.state.modal}
+            />
+            )}
+        >
           <Panel id="expenses">
             <PanelHeader>Расходы</PanelHeader>
-            <ExpensesPanel />
+            {
+                  user
+                    ? (
+                      <ExpensesPanel user={user} openExpensesModal={(e) => this.openExpensesModal(e)} />
+                    ) : ''
+              }
           </Panel>
         </View>
       </Epic>
