@@ -8,8 +8,9 @@ import MainPanel from './panels/MainPanel.jsx';
 
 const App = () => {
   // eslint-disable-next-line no-unused-vars
-  const [setUser] = useState(null);
-  const [setPopout] = useState(<ScreenSpinner size="large" />);
+  const [activePanel, setActivePanel] = useState('home');
+  const [fetchedUser, setUser] = useState(null);
+  const [popout, setPopout] = useState(<ScreenSpinner size="large" />);
 
   useEffect(() => {
     bridge.subscribe(({ detail: { type, data } }) => {
