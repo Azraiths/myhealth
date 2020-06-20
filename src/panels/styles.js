@@ -6,4 +6,8 @@ export default {
   button: {
     backgroundColor: accent,
   },
+  cell: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
 };
