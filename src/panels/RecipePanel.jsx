@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { ReactComponent as Pill } from '../img/aptechka_28.svg';
 import EmptyStateAidKit from '../components/EmptyStateAidKit';
 import getTrackUntilMidnight from '../models/getTrackUntilMidnight';
-import getAidKitTracking from '../models/getAidKitTracking';
+import getTrackingFullDay from '../models/getTrackingFullDay';
 
 Array.prototype.isEmpty = function () {
   return this.length === 0;
@@ -34,14 +34,13 @@ class RecipePanel extends Component {
   async componentDidMount() {
     const { user } = this.props;
 
-    const res = await getTrackUntilMidnight(404);
+    const res = await getTrackUntilMidnight(user);
 
     this.setState({ medicines: res });
   }
 
   render() {
     const { medicines } = this.state;
-    const { goToInfo } = this.props;
     const styles = {
       font: { fontWeight: 'bold', color: 'black', paddingRight: '10px' },
     };
@@ -50,7 +49,7 @@ class RecipePanel extends Component {
         <CardGrid>
           {
               medicines.map((v) => (
-                <Card key={v.medical} onClick={() => goToInfo(v)} size="l" mode="shadow">
+                <Card key={v.medical} size="l" mode="shadow">
                   <Cell before={<Text style={styles.font}>{v.time}</Text>} description={`${v.medtype} - ${v.dose}`}>{v.medical}</Cell>
                 </Card>
               ))
@@ -65,10 +64,5 @@ class RecipePanel extends Component {
     );
   }
 }
-
-RecipePanel.propTypes = {
-  goToInfo: PropTypes.func.isRequired,
-
-};
 
 export default RecipePanel;
