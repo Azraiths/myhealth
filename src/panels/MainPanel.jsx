@@ -13,6 +13,7 @@ import ExpensesPanel from './ExpensesPanel';
 import AddAidPanel from './AddAidPanel';
 import AidInfo from './AidInfo';
 import styles from './styles';
+import { ReactComponent as Recipe } from '../img/raspisanie_28.svg';
 
 class MainPanel extends React.Component {
   constructor(props) {
@@ -63,7 +64,7 @@ class MainPanel extends React.Component {
               data-story="recipe"
               text="Рецепты"
             >
-              <Icon28MoneyCircleOutline />
+              <Recipe style={{ fill: activeStory === 'recipe' ? styles.icon.color : '#99a2ad' }} />
             </TabbarItem>
             <TabbarItem
               onClick={this.onStoryChange}
@@ -79,20 +80,16 @@ class MainPanel extends React.Component {
         <View id="aidKit" activePanel={aidKitActivePanel}>
           <Panel id="aidKit">
             <PanelHeader
+              left={(
+                <PanelHeaderButton onClick={() => this.setState({ aidKitActivePanel: 'addNewAid' })}>
+                  <Icon28AddOutline style={styles.icon} />
+                </PanelHeaderButton>
+              )}
               separator={false}
             >
               Аптечка
             </PanelHeader>
             <AidKitPanel goToInfo={(e) => this.goToInfo(e)} />
-            <Cell style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button
-                size="xl"
-                style={{ ...styles.button }}
-                onClick={() => this.setState({ aidKitActivePanel: 'addNewAid' })}
-              >
-                Добавить лекарство
-              </Button>
-            </Cell>
           </Panel>
           <Panel id="addNewAid">
             <PanelHeader
