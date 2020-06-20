@@ -8,13 +8,12 @@ import PropTypes from 'prop-types';
 import { ReactComponent as Pill } from '../img/aptechka_28.svg';
 import EmptyStateAidKit from '../components/EmptyStateAidKit';
 import getTrackUntilMidnight from '../models/getTrackUntilMidnight';
-import getAidKitTracking from '../models/getAidKitTracking';
 import getTrackingFullDay from '../models/getTrackingFullDay';
 
 Array.prototype.isEmpty = function () {
   return this.length === 0;
 };
-class RecipePanel extends Component {
+class SchedulePanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,7 +47,6 @@ class RecipePanel extends Component {
 
   render() {
     const { medicines } = this.state;
-    const { goToInfo } = this.props;
     const styles = {
       font: { fontWeight: 'bold', color: 'black', paddingRight: '10px' },
       link: {
@@ -83,9 +81,9 @@ class RecipePanel extends Component {
   }
 }
 
-RecipePanel.propTypes = {
+SchedulePanel.propTypes = {
   goToInfo: PropTypes.func.isRequired,
 
 };
 
-export default RecipePanel;
+export default SchedulePanel;

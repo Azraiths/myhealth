@@ -4,16 +4,19 @@ import Icon28AddOutline from '@vkontakte/icons/dist/28/add_outline';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import {
-  View, Panel, Epic, TabbarItem, Tabbar, PanelHeader, platform, ANDROID, Button, Cell,
+  View, Panel, Epic, TabbarItem, Tabbar, PanelHeader, platform, ANDROID,
 } from '@vkontakte/vkui';
 import PanelHeaderButton from '@vkontakte/vkui/dist/es6/components/PanelHeaderButton/PanelHeaderButton';
 import AidKitPanel from './AidKitPanel';
-import RecipePanel from './RecipePanel';
+import SchedulePanel from './SchedulePandel';
+import ReceiptPanel from './ReceiptsPanel';
 import ExpensesPanel from './ExpensesPanel';
 import AddAidPanel from './AddAidPanel';
 import AidInfo from './AidInfo';
 import styles from './styles';
 import { ReactComponent as Recipe } from '../img/raspisanie_28.svg';
+import ReceiptInfo from './ReceiptInfo';
+import CreateReceiptPanel from './CreateReceiptPanel';
 
 class MainPanel extends React.Component {
   constructor(props) {
@@ -25,10 +28,12 @@ class MainPanel extends React.Component {
        * Для каждой главной панели если понадобится создаём свой стейт с дефолтным значением
        */
       aidKitActivePanel: 'aidKit',
+      receiptActivePanel: 'receipt',
       /**
        * Выбранное лекарство при нажатии на карточку в AidKitPanel. Передаётся в AidInfo
        */
       chosenMedicine: null,
+      selectedReceipt: null,
     };
     this.onStoryChange = this.onStoryChange.bind(this);
   }
@@ -41,10 +46,16 @@ class MainPanel extends React.Component {
     this.setState({ aidKitActivePanel: 'aidInfo', chosenMedicine: medicine });
   }
 
+  goToReceipt(receipt) {
+    this.setState({ receiptActivePanel: 'receiptInfo', selectedReceipt: receipt });
+  }
+
   render() {
     const { user } = this.props;
     const osName = platform();
-    const { activeStory, aidKitActivePanel, chosenMedicine } = this.state;
+    const {
+      activeStory, aidKitActivePanel, chosenMedicine, selectedReceipt, receiptActivePanel,
+    } = this.state;
     return (
       <Epic
         activeStory={activeStory}
@@ -60,11 +71,19 @@ class MainPanel extends React.Component {
             </TabbarItem>
             <TabbarItem
               onClick={this.onStoryChange}
-              selected={activeStory === 'recipe'}
-              data-story="recipe"
+              selected={activeStory === 'schedule'}
+              data-story="schedule"
+              text="Расписание"
+            >
+              <Recipe style={{ fill: activeStory === 'schedule' ? styles.icon.color : '#99a2ad' }} />
+            </TabbarItem>
+            <TabbarItem
+              onClick={this.onStoryChange}
+              selected={activeStory === 'receipt'}
+              data-story="receipt"
               text="Рецепты"
             >
-              <Recipe style={{ fill: activeStory === 'recipe' ? styles.icon.color : '#99a2ad' }} />
+              <Recipe style={{ fill: activeStory === 'receipt' ? styles.icon.color : '#99a2ad' }} />
             </TabbarItem>
             <TabbarItem
               onClick={this.onStoryChange}
@@ -127,18 +146,64 @@ class MainPanel extends React.Component {
           </Panel>
 
         </View>
-        <View id="recipe" activePanel="recipe">
-          <Panel id="recipe">
+        <View id="schedule" activePanel="schedule">
+          <Panel id="schedule">
             <PanelHeader>Расписание</PanelHeader>
+            {
+                      user
+                        ? (
+                          <SchedulePanel
+                            user={user}
+                          />
+                        ) : ''
+                  }
+
+          </Panel>
+        </View>
+        <View id="receipt" activePanel={receiptActivePanel}>
+          <Panel id="receipt">
+            <PanelHeader left={(
+              <PanelHeaderButton onClick={() => this.setState({ receiptActivePanel: 'createReceiptPanel' })}>
+                <Icon28AddOutline style={styles.icon} />
+              </PanelHeaderButton>
+            )}
+            >
+              Рецепты
+            </PanelHeader>
             {
                   user
                     ? (
-                      <RecipePanel
+                      <ReceiptPanel
                         user={user}
+                        goToReceipt={(e) => this.goToReceipt(e)}
                       />
                     ) : ''
               }
 
+          </Panel>
+          <Panel id="createReceiptPanel">
+            <PanelHeader
+              left={(
+                <PanelHeaderButton onClick={() => this.setState({ receiptActivePanel: 'receipt' })}>
+                  {osName === ANDROID ? <Icon24Back style={styles.icon} /> : <Icon28ChevronBack style={styles.icon} />}
+                </PanelHeaderButton>
+                    )}
+            >
+              Создать рецепт
+            </PanelHeader>
+            <CreateReceiptPanel user={user} onClose={() => this.setState({ receiptActivePanel: 'receipt' })} />
+          </Panel>
+          <Panel id="receiptInfo">
+            <PanelHeader
+              left={(
+                <PanelHeaderButton onClick={() => this.setState({ receiptActivePanel: 'receipt' })}>
+                  {osName === ANDROID ? <Icon24Back /> : <Icon28ChevronBack />}
+                </PanelHeaderButton>
+                    )}
+            >
+              Информация о рецепте
+            </PanelHeader>
+            <ReceiptInfo {...selectedReceipt} />
           </Panel>
         </View>
         <View id="expenses" activePanel="expenses">

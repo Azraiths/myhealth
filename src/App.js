@@ -25,6 +25,7 @@ class App extends React.Component {
     });
 
     const user = await bridge.send('VKWebAppGetUserInfo');
+    // const friends = await bridge.send('VKWebAppGetFriends');
 
     this.setState({ user });
   }

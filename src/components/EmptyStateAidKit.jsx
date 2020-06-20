@@ -1,16 +1,30 @@
 import { Placeholder } from '@vkontakte/vkui';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ReactComponent as Pill } from '../img/aptechka_28.svg';
 
-const EmptyStateAidKit = () => (
-  <Placeholder
-    stretched
-    icon={<Pill style={{ height: '48px', width: '48px' }} />}
-    header="В вашей аптечке пусто."
-  >
-    Лекарства можно добавить кнопкой
-    в правом верхнем углу экрана.
-  </Placeholder>
-);
+const EmptyStateAidKit = (props) => {
+  const { placeholderIcon, header, message } = props;
 
+  const properties = {
+    icon: placeholderIcon || <Pill style={{ height: '48px', width: '48px' }} />,
+    header: header || 'В вашей аптечке пусто.',
+    message: message || 'Лекарства можно добавить кнопкой в правом верхнем углу экрана.',
+  };
+
+  return (
+    <Placeholder
+      stretched
+      {...properties}
+    >
+      {properties.message}
+    </Placeholder>
+  );
+};
+
+EmptyStateAidKit.propTypes = {
+  placeholderIcon: PropTypes.instanceOf(React.Component),
+  header: PropTypes.string,
+  message: PropTypes.string,
+};
 export default EmptyStateAidKit;
